@@ -37,6 +37,14 @@ import { SpinnerMessage, UserMessage } from '@/components/stocks/message'
 import { Chat, Message } from '@/lib/types'
 import { auth } from '@/auth'
 
+const mistral = createMistral({
+    // custom settings
+
+    apiKey: process.env.BLYSS_API_KEY,
+    baseURL: process.env.ENCLAVE_API_URL,
+  });
+
+
 async function confirmPurchase(symbol: string, price: number, amount: number) {
   'use server'
 
@@ -126,13 +134,6 @@ async function submitUserMessage(content: string) {
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
   let textNode: undefined | React.ReactNode
-
-  const mistral = createMistral({
-    // custom settings
-
-    apiKey: process.env.BLYSS_API_KEY,
-    baseURL: process.env.ENCLAVE_API_URL,
-  });
 
   const result = await streamUI({
     model: openai('gpt-3.5-turbo'),
