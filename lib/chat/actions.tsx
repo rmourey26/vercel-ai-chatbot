@@ -9,7 +9,8 @@ import {
   createStreamableValue
 } from 'ai/rsc'
 import { openai } from '@ai-sdk/openai'
-
+import { mistral } from '@ai-sdk/mistral';
+import { createMistral } from '@ai-sdk/mistral';
 import {
   spinner,
   BotCard,
@@ -125,6 +126,13 @@ async function submitUserMessage(content: string) {
 
   let textStream: undefined | ReturnType<typeof createStreamableValue<string>>
   let textNode: undefined | React.ReactNode
+
+  const mistral = createMistral({
+    // custom settings
+
+    apiKey: process.env.BLYSS_API_KEY,
+    baseURL: process.env.ENCLAVE_API_URL,
+  });
 
   const result = await streamUI({
     model: openai('gpt-3.5-turbo'),
