@@ -9,7 +9,7 @@ import {
   createStreamableValue
 } from 'ai/rsc'
 import { openai } from '@ai-sdk/openai'
-import { mistral } from '@ai-sdk/mistral';
+
 import { createMistral } from '@ai-sdk/mistral';
 import {
   spinner,
